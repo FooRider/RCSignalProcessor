@@ -34,12 +34,11 @@ SimpleLight strobes;
 void setup() {
   input.initialize(2); // read input on pin 2
   
-  landingLights.initialize(11);
-  navigationalLights.initialize(9);
-  strobes.initialize(6);
-  //topBeacon.initialize(5);
-  topBeacon.initialize(13);
-
+  landingLights.initialize(11);     // landing lights on pin 11
+  navigationalLights.initialize(9); // nav lights on pin 9
+  strobes.initialize(6);            // strobes on pin 6
+  topBeacon.initialize(5);          // top beacon on pin 5
+  
   //Serial.begin(57600);  while (!Serial) { }  Serial.println("Serial initialized!");
 };
 

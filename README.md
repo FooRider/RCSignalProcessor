@@ -1,6 +1,20 @@
 # RCSignalProcessor
 Mini project for processing standard RC signals on an arduino board, meant to extend functionality of RC models.
 
+# Usage
+
+Main value of this program is in its CppmInput and PwmInput classes, which
+read CPPM or PWM inputs from interrupt pins (pins 2 or 3 on Arduino Nano).
+This is implemented using interrupts, thus leaving main program loop free to
+manage outputs.
+
+To use this program, I suggest that you first uncomment serial debug messages 
+and make sure that the program can read input from RC receiver and also to 
+make note of values read.
+
+Afterwards, you can comment out the debug messages and  modify main loop to 
+your needs. A simple light pattern is pre-programmed.
+
 # Licensing
 This project is distributed under MIT License
 
