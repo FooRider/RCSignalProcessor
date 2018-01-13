@@ -24,6 +24,57 @@
 #define PWMINPUT_H
 
 class PwmInput : public Input {
+private:
+  int inputPin;
+
+  volatile unsigned long value;
+  volatile unsigned long lastRiseTime;
+
+  void inputPinChanged();
+
+public:
+  // interrupt to non-static member hack follows
+  static PwmInput *interruptListener1;
+  static PwmInput *interruptListener2;
+  static PwmInput *interruptListener3;
+  static PwmInput *interruptListener4;
+  static PwmInput *interruptListener5;
+  static PwmInput *interruptListener6;
+  static PwmInput *interruptListener7;
+  static PwmInput *interruptListener8;
+  static PwmInput *interruptListener9;
+  static PwmInput *interruptListener10;
+  static PwmInput *interruptListener11;
+  static PwmInput *interruptListener12;
+  static PwmInput *interruptListener13;
+  static PwmInput *interruptListener14;
+  static PwmInput *interruptListener15;
+  static PwmInput *interruptListener16;
+  static PwmInput *interruptListener17;
+  static PwmInput *interruptListener18;
+  static PwmInput *interruptListener19;
+  static PwmInput *interruptListener20;
+  static void interrupt1();
+  static void interrupt2();
+  static void interrupt3();
+  static void interrupt4();
+  static void interrupt5();
+  static void interrupt6();
+  static void interrupt7();
+  static void interrupt8();
+  static void interrupt9();
+  static void interrupt10();
+  static void interrupt11();
+  static void interrupt12();
+  static void interrupt13();
+  static void interrupt14();
+  static void interrupt15();
+  static void interrupt16();
+  static void interrupt17();
+  static void interrupt18();
+  static void interrupt19();
+  static void interrupt20();
+  
 public:
   virtual void initialize(int pin);
   virtual long getRawValue(int idx);

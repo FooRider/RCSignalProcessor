@@ -27,15 +27,22 @@ class CppmInput : public Input {
 private:
   volatile int channelIndex = 0;
   volatile int maxChannels = 16;
-  volatile unsigned long values[]; // = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  volatile unsigned long values[16] {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
   volatile unsigned long lastRiseTime = 0;
 
   int inputPin;
 
   void inputPinChanged();
 
+public:
   // interrupt to non-static member hack follows
-  static CppmInput *interruptListener1;
+  static int interruptCounter;
+  static CppmInput *interruptListeners[];
+
+  static void interrupt0();
+  static void interrupt1();
+  
+  /*static CppmInput *interruptListener1;
   static CppmInput *interruptListener2;
   static CppmInput *interruptListener3;
   static CppmInput *interruptListener4;
@@ -74,7 +81,7 @@ private:
   static void interrupt17();
   static void interrupt18();
   static void interrupt19();
-  static void interrupt20();
+  static void interrupt20();*/
   
 public:
   virtual void initialize(int pin);

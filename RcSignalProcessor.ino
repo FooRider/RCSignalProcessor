@@ -21,10 +21,16 @@
 #include "CppmInput.h"
 #include "PwmInput.h"
 
+CppmInput input;
+//PwmInput input;
+
 void setup() {
-  
+  input.initialize(2);
+
+  pinMode(13, OUTPUT);
 };
 
 void loop() {
-  
+  delay(100);
+  digitalWrite(13, input.getValue(0) > 1500 ? HIGH : LOW);
 };
