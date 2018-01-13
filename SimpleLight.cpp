@@ -18,33 +18,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef CPPMINPUT_H
-#define CPPMINPUT_H
+#include <Arduino.h>
+#include "SimpleLight.h"
 
-#include "Input.h"
+void SimpleLight::initialize(int pin) {
+  this->pin = pin;
+  pinMode(pin, OUTPUT);
+}
 
-class CppmInput : public Input {
-private:
-  volatile int channelIndex = 0;
-  volatile int maxChannels = 16;
-  volatile unsigned long values[16] {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
-  volatile unsigned long lastRiseTime = 0;
+void SimpleLight::on() {
+  this->set(true);
+}
 
-  int inputPin;
+void SimpleLight::off() {
+  this->set(false);
+}
 
-  void inputPinChanged();
+void SimpleLight::set(bool shouldBeOn) {
+  digitalWrite(this->pin, shouldBeOn ? HIGH : LOW);
+}
 
-public:
-  // interrupt to non-static member hack follows
-  static int interruptCounter;
-  static CppmInput *interruptListeners[];
-
-  static void interrupt0();
-  static void interrupt1();
-  
-public:
-  virtual void initialize(int pin);
-  virtual long getValue(int idx);
-};
-
-#endif

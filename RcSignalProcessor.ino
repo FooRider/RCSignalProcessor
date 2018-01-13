@@ -18,19 +18,49 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+//#include <SoftwareSerial.h>
 #include "CppmInput.h"
 #include "PwmInput.h"
+#include "SimpleLight.h"
 
 CppmInput input;
 //PwmInput input;
 
-void setup() {
-  input.initialize(2);
+SimpleLight landingLights;
+SimpleLight navigationalLights;
+SimpleLight topBeacon;
+SimpleLight bottomBeacon;
+SimpleLight tailBeacon;
 
-  pinMode(13, OUTPUT);
+void setup() {
+  input.initialize(2); // read input on pin 2
+  
+  landingLights.initialize(13);
+  navigationalLights.initialize(9);
+  topBeacon.initialize(6);
+  bottomBeacon.initialize(5);
+  tailBeacon.initialize(3);
+
+  //Serial.begin(57600);  while (!Serial) { }  Serial.println("Serial initialized!");
 };
 
 void loop() {
-  delay(100);
-  digitalWrite(13, input.getValue(0) > 1500 ? HIGH : LOW);
+  long val = input.getValue(4);
+
+  if (val < 1000) { // low - all lights off
+    landingLights.off();
+    navigationalLight.off();
+  }
+  else if (val < 1400) { // mid - all lights on
+    landingLights.on();
+    navigationalLight.on();
+  }
+  else { // high - all but landing lights on
+    landingLights.off();
+    navigationalLight.on();
+  }
+
+  //delay(1000); Serial.print("0  "); Serial.println(input.getValue(0));  Serial.print("1  "); Serial.println(input.getValue(1));  Serial.print("2  "); Serial.println(input.getValue(2));  Serial.print("3  "); Serial.println(input.getValue(3));  Serial.print("4  "); Serial.println(input.getValue(4));  Serial.print("5  "); Serial.println(input.getValue(5)); Serial.println();
 };
+
+

@@ -24,8 +24,7 @@
 class Input {
 public:
   virtual void initialize(int pin) {};
-  virtual long getRawValue(int idx) = 0;
-  virtual float getValue(int idx) = 0;
+  virtual long getValue(int idx) = 0;
 
   virtual ~Input() {}
 };

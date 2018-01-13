@@ -18,33 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef CPPMINPUT_H
-#define CPPMINPUT_H
+#ifndef SIMPLELIGHT_H
+#define SIMPLELIGHT_H
 
-#include "Input.h"
-
-class CppmInput : public Input {
+class SimpleLight {
 private:
-  volatile int channelIndex = 0;
-  volatile int maxChannels = 16;
-  volatile unsigned long values[16] {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
-  volatile unsigned long lastRiseTime = 0;
-
-  int inputPin;
-
-  void inputPinChanged();
-
-public:
-  // interrupt to non-static member hack follows
-  static int interruptCounter;
-  static CppmInput *interruptListeners[];
-
-  static void interrupt0();
-  static void interrupt1();
+  int pin;
   
 public:
-  virtual void initialize(int pin);
-  virtual long getValue(int idx);
+  void initialize(int pin);
+  void on();
+  void off();
+  void set(bool shouldBeOn);
 };
 
-#endif
+#endif SIMPLELIGHT_H
