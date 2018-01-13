@@ -29,17 +29,16 @@ CppmInput input;
 SimpleLight landingLights;
 SimpleLight navigationalLights;
 SimpleLight topBeacon;
-SimpleLight bottomBeacon;
-SimpleLight tailBeacon;
+SimpleLight strobes;
 
 void setup() {
   input.initialize(2); // read input on pin 2
   
-  landingLights.initialize(13);
+  landingLights.initialize(11);
   navigationalLights.initialize(9);
-  topBeacon.initialize(6);
-  bottomBeacon.initialize(5);
-  tailBeacon.initialize(3);
+  strobes.initialize(6);
+  //topBeacon.initialize(5);
+  topBeacon.initialize(13);
 
   //Serial.begin(57600);  while (!Serial) { }  Serial.println("Serial initialized!");
 };
@@ -47,17 +46,25 @@ void setup() {
 void loop() {
   long val = input.getValue(4);
 
-  if (val < 1000) { // low - all lights off
+  long phase = millis() % 1000;
+
+  if (val < 1000) { // low 
     landingLights.off();
-    navigationalLight.off();
+    navigationalLights.on();
+    strobes.set((phase >= 0 && phase < 100) || (phase >= 200 && phase < 300));
+    topBeacon.set(phase >= 600 && phase < 750);
   }
-  else if (val < 1400) { // mid - all lights on
+  else if (val < 1400) { // mid 
     landingLights.on();
-    navigationalLight.on();
+    navigationalLights.on();
+    strobes.set((phase >= 0 && phase < 100) || (phase >= 200 && phase < 300));
+    topBeacon.set(phase >= 400 && phase < 550);
   }
-  else { // high - all but landing lights on
+  else { // high 
     landingLights.off();
-    navigationalLight.on();
+    navigationalLights.off();
+    strobes.off();
+    topBeacon.off();
   }
 
   //delay(1000); Serial.print("0  "); Serial.println(input.getValue(0));  Serial.print("1  "); Serial.println(input.getValue(1));  Serial.print("2  "); Serial.println(input.getValue(2));  Serial.print("3  "); Serial.println(input.getValue(3));  Serial.print("4  "); Serial.println(input.getValue(4));  Serial.print("5  "); Serial.println(input.getValue(5)); Serial.println();

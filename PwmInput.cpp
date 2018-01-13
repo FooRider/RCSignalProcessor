@@ -22,7 +22,7 @@
 #include "PwmInput.h"
 
 static int PwmInput::interruptCounter = 0;
-static PwmInput *interruptListeners[2] = { NULL, NULL };
+static PwmInput *PwmInput::interruptListeners[2] { NULL, NULL };
 
 void PwmInput::initialize(int pin) {
   this->inputPin = pin;
@@ -51,5 +51,5 @@ void PwmInput::inputPinChanged() {
     this->value = time - this->lastRiseTime;
 };
 
-void PwmInput::interrupt0() { interruptListeners[0]->inputPinChanged(); };
-void PwmInput::interrupt1() { interruptListeners[1]->inputPinChanged(); };
+void PwmInput::interrupt0() { PwmInput::interruptListeners[0]->inputPinChanged(); };
+void PwmInput::interrupt1() { PwmInput::interruptListeners[1]->inputPinChanged(); };
