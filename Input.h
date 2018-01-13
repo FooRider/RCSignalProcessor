@@ -18,13 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "CppmInput.h"
-#include "PwmInput.h"
+#ifndef INPUT_H
+#define INPUT_H
 
-void setup() {
-  
+class Input {
+public:
+  virtual void initialize(int pin) {};
+  virtual long getRawValue(int idx) = 0;
+  virtual float getValue(int idx) = 0;
+
+  virtual ~Input() {}
 };
 
-void loop() {
-  
-};
+#endif
