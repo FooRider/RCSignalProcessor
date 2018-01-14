@@ -30,11 +30,10 @@ void CppmInput::initialize(int pin) {
 
   // interrupt to non-static member hack follows
   CppmInput::interruptListeners[CppmInput::interruptCounter] = this;
-  /*switch (CppmInput::interruptCounter)
-  {
+  switch (CppmInput::interruptCounter) {
     case 0: attachInterrupt(digitalPinToInterrupt(pin), CppmInput::interrupt0, CHANGE); break;
     case 1: attachInterrupt(digitalPinToInterrupt(pin), CppmInput::interrupt1, CHANGE); break;
-  }*/
+  }
   CppmInput::interruptCounter++;
 };
 
